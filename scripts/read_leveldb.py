@@ -31,10 +31,12 @@ def main():
     """
     # Default to None to check if they're set later
     db_path = None
+    command = None
+    key = None
 
     # Read configuration file
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('scripts/config.ini')
 
     if 'LevelDB' in config and 'db_path' in config['LevelDB']:
         db_path = config['LevelDB']['db_path']
@@ -42,17 +44,22 @@ def main():
     # Override db_path if provided via command-line arguments
     if len(sys.argv) >= 2:
         command = sys.argv[1]
-        if len(sys.argv) == 4:
+        if command == "get" and len(sys.argv) == 4:
             db_path = sys.argv[2]
             key = sys.argv[3]
-        elif len(sys.argv) == 3:
+        elif command == "get" and len(sys.argv) == 3:
             key = sys.argv[2]
-    else:
-        print("Usage: python3 read_leveldb.py <command> [db_path] [key]")
-        print("Commands:")
-        print("  get <key>        - Get the value for the specified key")
-        print("  scan [db_path]   - Scan and print all key-value pairs")
-        sys.exit(1)
+        elif command == "scan" and len(sys.argv) == 3:
+            db_path = sys.argv[2]
+        elif command == "scan" and len(sys.argv) == 2:
+            pass
+        else:
+            print("Usage: python3 scripts/read_leveldb.py <command> [db_path] [key]")
+            print("Commands:")
+            print("  get <key>         - Get the value for the specified key")
+            print("  get <db_path> <key> - Get the value for the specified key with a specified db_path")
+            print("  scan [db_path]    - Scan and print all key-value pairs with an optional specified db_path")
+            sys.exit(1)
 
     if db_path is None:
         print("Database path must be specified either in config.ini or as a command-line argument.")
@@ -65,8 +72,8 @@ def main():
         sys.exit(1)
 
     if command == "get":
-        if len(sys.argv) != 3 and len(sys.argv) != 4:
-            print("Usage: python3 read_leveldb.py get [db_path] <key>")
+        if key is None:
+            print("Usage: python3 scripts/read_leveldb.py get [db_path] <key>")
             sys.exit(1)
         get_value(db, key)
     elif command == "scan":
