@@ -19,6 +19,7 @@ leveldbreader/
 │   ├── read_leveldb.py
 │   ├── config.ini
 │
+├── Dockerfile
 ├── LICENSE
 └── README.md
 ```
