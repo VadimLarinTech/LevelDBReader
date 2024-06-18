@@ -2,14 +2,7 @@
 
 This project consists of a Chrome extension for storing key-value pairs using the `chrome.storage` API, and a Python script to fetch and display these values from the local LevelDB database.
 
-## Build Guide
-
-#### Installing Python, pip and plyvel
-```sh
-sudo apt install python3-pip
-sudo apt-get install build-essential python3-dev libleveldb-dev
-pip install plyvel
-```
+**The script can be run directly or using Docker.**
 
 ## Project Structure
 
