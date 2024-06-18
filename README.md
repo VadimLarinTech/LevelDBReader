@@ -2,6 +2,8 @@
 
 This project consists of a Chrome extension for storing key-value pairs using the `chrome.storage` API, and a Python script to fetch and display these values from the local LevelDB database.
 
+**The script can be run directly or using Docker.**
+
 ## Project Structure
 
 ```plaintext
@@ -48,7 +50,17 @@ leveldbreader/
 1. Uncomment the code in `background.js` if you need to set default values when the extension is installed.
 2. The code is currently commented out to prevent overriding existing data.
 
-## Python Script
+## Build Guide Using the Python Script
+
+### Prerequisites
+
+#### Installing Python, pip and plyvel
+
+```sh
+sudo apt install python3-pip
+sudo apt-get install build-essential python3-dev libleveldb-dev
+pip install plyvel
+```
 
 ### Files
 
@@ -97,6 +109,30 @@ python3 scripts/read_leveldb.py get <db_path> "your_key"
 python3 scripts/read_leveldb.py scan <db_path>
 ```
 
+## Build Guide Using Docker
+
+### Prerequisites
+
+1. Ensure Docker is installed on your system. If not, follow the instructions at https://docs.docker.com/get-docker/.
+
+### Using the Docker Image
+
+#### Fetch a specific value by specifying the database path in the command:
+```sh
+sudo docker run --rm -v "/path/to/your/local/leveldb:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py get /data "your_key"
+```
+#### Example
+```sh
+sudo docker run --rm -v "/home/ash/.config/google-chrome/Default/Sync Extension Settings/fpdpjejapahidhmchgkkljaapifdlndj:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py get /data "1"
+```
+### Scan and display all key-value pairs by specifying the database path in the command:
+```sh
+sudo docker run --rm -v "/path/to/your/local/leveldb:/data" your-dockerhub-username/leveldbreader python3 scripts/read_leveldb.py scan /data
+```
+#### Example
+```sh
+sudo docker run --rm -v "/home/ash/.config/google-chrome/Default/Sync Extension Settings/fpdpjejapahidhmchgkkljaapifdlndj:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py scan /data
+```
 # License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
