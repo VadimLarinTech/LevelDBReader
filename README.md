@@ -121,15 +121,15 @@ python3 scripts/read_leveldb.py scan <db_path>
 ```sh
 sudo docker run --rm -v "/path/to/your/local/leveldb:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py get /data "your_key"
 ```
-#### Example
+##### Example
 ```sh
 sudo docker run --rm -v "/home/ash/.config/google-chrome/Default/Sync Extension Settings/fpdpjejapahidhmchgkkljaapifdlndj:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py get /data "1"
 ```
-### Scan and display all key-value pairs by specifying the database path in the command:
+#### Scan and display all key-value pairs by specifying the database path in the command:
 ```sh
 sudo docker run --rm -v "/path/to/your/local/leveldb:/data" your-dockerhub-username/leveldbreader python3 scripts/read_leveldb.py scan /data
 ```
-#### Example
+##### Example
 ```sh
 sudo docker run --rm -v "/home/ash/.config/google-chrome/Default/Sync Extension Settings/fpdpjejapahidhmchgkkljaapifdlndj:/data" vadimlarintech/leveldbreader python3 scripts/read_leveldb.py scan /data
 ```
