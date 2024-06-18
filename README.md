@@ -50,7 +50,7 @@ leveldbreader/
 1. Uncomment the code in `background.js` if you need to set default values when the extension is installed.
 2. The code is currently commented out to prevent overriding existing data.
 
-## Build Guide Using the Python Script
+## 🐍 Build Guide Using the Python Script
 
 ### Prerequisites
 
@@ -81,7 +81,7 @@ pip install plyvel
 db_path = /home/your-username/.config/google-chrome/Default/Sync Extension Settings/<your-extension-id>
 ```
 
-## Running the Script
+### Running the Script
 
 1. Ensure config.ini contains the correct database path.
 
@@ -95,7 +95,7 @@ python3 scripts/read_leveldb.py get "your_key"
 python3 scripts/read_leveldb.py scan
 ```
 
-## Command-Line Usage
+### Command-Line Usage
 
 #### Fetch a specific value:
 
@@ -109,7 +109,7 @@ python3 scripts/read_leveldb.py get <db_path> "your_key"
 python3 scripts/read_leveldb.py scan <db_path>
 ```
 
-## Build Guide Using Docker
+## 🐳 Build Guide Using Docker
 
 ### Prerequisites
 
